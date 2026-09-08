@@ -1,0 +1,25 @@
+name: verificar
+on: [push, pull_request]
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Fonte do deck íntegro (tags balanceadas, sem marcação vazada)
+        run: |
+          python3 - <<'PY'
+          import re,sys; h=open('manual/fonte_artefato.html',encoding='utf-8').read()
+          for t in ['div','section','span','table','tr','td','ul','ol','li','p','dl','dt','dd','figure','details']:
+              o=len(re.findall(r'<%s[\s>]'%t,h)); c=len(re.findall(r'</%s>'%t,h)); assert o==c,(t,o,c)
+          assert not re.search(r'data-d="[^"]*<span',h); assert not re.findall(r'<!--(IMG|SVG):',h)
+          print('ok:',len(re.findall(r'<section class="slide',h)),'slides')
+          PY
+      - name: Scripts executam
+        run: |
+          python3 scripts/tamanho_amostra.py proporcao --e 0.05 --N 1000
+          python3 scripts/cronograma.py modelos/cronograma.csv --meses 12 --svg /tmp/c.svg
+          python3 scripts/iniciar_projeto.py /tmp/proj --tema "teste" && test -f /tmp/proj/PROGRESSO_METODOLOGIA.md
+          printf 'Segundo Gil (2017), a pesquisa exploratória visa familiaridade. "Trecho literal longo o bastante para ser citação direta" (GIL, 2017).\n\n# Referências\n\nGIL, A. C. Como elaborar projetos de pesquisa. 6. ed. São Paulo: Atlas, 2017.\n' > /tmp/m.md
+          python3 scripts/verificar_citacoes.py /tmp/m.md || true
