@@ -2,6 +2,8 @@
 
 Manual em formato de slides (54) sobre metodologia da pesquisa para pós-graduação: fundamentos e ética, do tema ao problema, classificação e escolha do método, amostragem e coleta, análise quantitativa/qualitativa/mista, projeto de pesquisa (NBR 15287:2025) e comitê de ética, redação conforme ABNT (NBR 14724:2024, 10520:2023, 6023:2025, 6028:2021), ferramentas, erros típicos, checklist e glossário com popovers. Capturas de tela reais e datadas (Plataforma Brasil, Lattes, ORCID, Sucupira, Portal CAPES, BDTD, SciELO, OSF, PRISMA, Overleaf) e figura gerada por script a partir da API aberta da OpenAlex.
 
+**Manual on-line:** https://metodologia.mirandastech.com.br/ · **PDF:** https://metodologia.mirandastech.com.br/manual.pdf
+
 Manual irmão: **Uso de IA na pesquisa científica** — https://manual.mirandastech.com.br/
 
 | Pasta | O que há |
